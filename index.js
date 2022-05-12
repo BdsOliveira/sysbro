@@ -4,6 +4,8 @@ const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const path = require('path');
 
+const mongoose = require('mongoose');
+
 /* const Chart = require('chart.js');
 const myChart = new Chart(); */
 
@@ -17,11 +19,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 })
 
-app.listen(PORT);
+app.listen(PORT, () => {
+    console.log(`Server running on port: ${PORT}`);
+});
 
 // Connecting to database
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@projects-backend.8algy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
+mongoose.connect('mongodb://localhost:27017/')
     .then(() => {
-        console.log('Database connected sucessfully.');
+        console.log('Local database succesfully connected.');
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.error(err));

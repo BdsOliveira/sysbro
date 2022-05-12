@@ -1,5 +1,5 @@
 {
-  "name": "sisbro",
+  "name": "sysbro",
   "version": "1.0.0",
   "description": "System to control selling and comision of Brownies",
   "main": "index.js",
@@ -22,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mongoose": "^6.3.3",
     "path": "^0.12.7"
   }
 }
