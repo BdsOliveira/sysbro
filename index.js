@@ -18,3 +18,10 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT);
+
+// Connecting to database
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@projects-backend.8algy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
+    .then(() => {
+        console.log('Database connected sucessfully.');
+    })
+    .catch((err) => console.log(err))
