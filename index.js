@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const path = require('path');
@@ -24,8 +25,12 @@ app.listen(PORT, () => {
 });
 
 // Connecting to database
-mongoose.connect('mongodb://localhost:27017/')
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@projects-backend.8algy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`, {
+    useNewUrlParser: true
+})
     .then(() => {
-        console.log('Local database succesfully connected.');
+        console.log(`Database sucessfully connected.`);
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+        console.log(err);
+    })
