@@ -1,8 +1,0 @@
-const mongoose = require('mongoose');
-
-const Seller = mongoose.model('Seller', {
-    name: String,
-    company: String,
-    office: String,
-})
-module.exports = Seller;
