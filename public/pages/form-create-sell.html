@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <title>Controle de Brownies</title>
+</head>
+
+<body>
+    <div class="title">
+        <p>Cadastrar novas vendas</p>
+        <h1 class="">&nbsp;</h1>
+
+    </div>
+
+    <menu>
+        <div class="icon-bar">
+            <a href="../index.html"><i class="fa fa-home"></i></a>
+            <a class="active" href="/pages/form-create-sell.html"><i class="fa-solid fa-circle-plus"></i></a>
+            <a href="/pages/report.html"><i class="fa-solid fa-chart-column"></i></a>
+            <!-- <a href="#"><i class="fa fa-globe"></i></a>
+            <a href="#"><i class="fa fa-trash"></i></a> -->
+        </div>
+    </menu>
+
+    <section class="content">
+        <form action="../js/createSell.js" method="POST">
+            <label for="nameSeller">Nome do Vendedor:</label><br>
+            <select class="field" name="nameSeller" id="nameSeller">
+                <option value=""></option>
+                <option value="Ariely Barros">Ariely Barros</option>
+                <option value="Brena Santos">Brena Santos</option>
+                <option value="Bruno Oliveira">Bruno Oliveira</option>
+                <option value="Cleiton X">Cleiton X</option>
+                <option value="Diana X">Diana X</option>
+                <option value="Itamara X">Itamara X</option>
+                <option value="Irmã Josirene">Irmã Josirene</option>
+                <option value="Jailson X">Jailson X</option>
+                <option value="Josirene Cruz">Josirene Cruz</option>
+                <option value="Pauliana Santos">Pauliana Santos</option>
+                <option value="Thais X">Thais X</option>
+            </select><br>
+            
+            <label for="companySeller">Empresa do vendedor:</label><br>
+            <select class="field" name="companySeller" id="companySeller">
+                <option value=""></option>
+                <option value="Estacao Grill">Estação Grill</option>
+                <option value="Patroni Pizzaria">Patroni Pizzaria</option>
+            </select><br>
+            <label for="quantityClients">Quantidade vendida para Cliente:</label><br>
+            <input class="field" type="number" name="quantityClients" id="quantityClients"><br>
+            <label for="quantityEmploye">Quantidade vendida para Lojista:</label><br>
+            <input class="field" type="number" name="quantityEmploye" id="quantityEmploye"><br>
+
+            <button class="submit" type="submit">Cadastrar</button>
+        </form>
+    </section>
+
+    <script src="../js/createSell.js" type="module"></script>
+</body>
+
+</html>

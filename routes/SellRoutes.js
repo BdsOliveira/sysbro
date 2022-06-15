@@ -11,7 +11,7 @@ router.get('/:sellID', sellController.getOneSell)
 // Return a list of all sells in a range date
 router.get('/:beginDate/:endDate', sellController.getSellsFromDate)
 
-// Register a new sells
+// Register a new sell
 router.post('/', sellController.createNewSell)
 
 // Update an existing sell 

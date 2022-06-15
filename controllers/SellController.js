@@ -1,3 +1,6 @@
+const Sell = require('../entities/Sell');
+const dateToBrString = require('../services/dateToBrString');
+
 const getAllSells = async (req, res) => {
     try {
         const sells = await Sell.find();
@@ -11,32 +14,54 @@ const getAllSells = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-const getOneSell = (req, res) => {
-    res.send('Pegou uma venda especifica');
-
+const getOneSell = async (req, res) => {
+    try {
+        const sell = await Sell.findOne({ "_id": req.params.sellID})
+        if (sell) {
+            res.status(200).json(sell);
+            return;
+        }
+        res.status(404).json({
+            "message" : "Cannot find any sell with ID provided",
+            "id" : req.params.sellID
+        });
+    } catch (error) {
+        res.send("Não deu!")
+    }
 };
-const getSellsFromDate = (req, res) => {
-    res.send('Pegou as vendas de um pediodo');
-
+const getSellsFromDate = async (req, res) => {
+    let {beginDate, endDate} = req.params;
+    try {
+        const sells = await Sell.find({date: {$gt: beginDate, $lt: endDate}})
+        if (sells.length < 1) {
+            res.json({ message: "Empty database" });
+            return;
+        }
+        res.status(200).json(sells);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 };
 const createNewSell = (req, res) => {
-    res.send('Criou uma nova venda');
-    /* let sells = req.body;
-
-    Sell.create(sells)
-        .then((result) => {
-            res.status(201);
-        }).catch((err) => {
-            res.status(403).json({ message: "Not possible to create a new Sell" });
-        }); */
-
+    let sell = { nameSeller, companySeller, quantityClients, quantityEmploye } = req.body;
+    sell.date = new Date();
+    try {
+        Sell.create(sell)
+        res.status(201).send();
+    } catch (error) {
+        res.status(403).json({ message: "Not possible to create a new Sell" });
+    }
 };
 const updateOneSell = (req, res) => {
     res.send('Atualizou uma venda especifica');
 };
-const deleteOneSell = (req, res) => {
-    res.send('Deletou uma venda especifica');
-
+const deleteOneSell = async (req, res) => {
+    try {
+        const sell = await Sell.deleteOne({ "_id": req.params.sellID})
+        res.status(200).json(sell);
+    } catch (error) {
+        res.send(`Cannot delete sell with id: ${req.params.sellID}`)
+    }
 };
 
 module.exports = {
