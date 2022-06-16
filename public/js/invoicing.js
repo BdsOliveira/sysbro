@@ -6,7 +6,7 @@ async function getAllSells(){
     const initialDate = date.toISOString();
     
     let vendas = [];
-    vendas = await fetch(`http://localhost:3000/sells/${initialDate}/${endDate}`);
+    vendas = await fetch(`https://sysbro.herokuapp.com/sells/${initialDate}/${endDate}`);
     return await vendas.json();
 }
 
