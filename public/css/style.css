@@ -110,3 +110,7 @@ label {
   background-color: #04AA6D;
   /* Add an active/current color */
 }
+
+.submit:hover {
+  cursor: pointer;
+}
