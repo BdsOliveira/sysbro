@@ -11,8 +11,8 @@ async function resquest() {
         return;
     }
     createSell(sell)
-        .then(response => {
-            if (response === 201) {
+        .then(status => {
+            if (status === 201) {
                 showSuccessfullMessage()
             } else {
                 showFailMessage()
@@ -22,22 +22,28 @@ async function resquest() {
             console.log(data)
         })
 }
-
 async function createSell(newSell = {}) {
+    console.log(newSell)
+    let sellObject = {
+        "nameSeller": `${newSell.nameSeller}`,
+        "companySeller": `${newSell.companySeller}`,
+        "quantityClients": `${newSell.quantityClients}`,
+        "quantityEmploye": `${newSell.quantityEmploye}`,
+        "date": `${new Date(newSell.date).toISOString()}`,
+    }
+    console.log(sellObject)
     let response = await fetch("https://sysbro.herokuapp.com/sells", {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify(newSell),
+        body: JSON.stringify(sellObject),
     });
     return response.status;
 }
-
 function printMessage(field = '') {
-    alert(`Preencha o "${field.toUpperCase()}" para continuar`);
+    alert(`Preencha o campo '"${field.toUpperCase()}"' para continuar`);
 }
-
 function getSellObjectFromForm() {
     let newSell = {};
     let form = document.getElementById("formCreateSell");
@@ -45,6 +51,7 @@ function getSellObjectFromForm() {
     newSell.companySeller = form.elements[1].value;
     newSell.quantityClients = form.elements[2].value;
     newSell.quantityEmploye = form.elements[3].value;
+    newSell.date = form.elements[4].value;
     if (newSell.nameSeller === '' || newSell.nameSeller === null) {
         printMessage('Nome do Vendedor');
         return -1;
@@ -56,6 +63,9 @@ function getSellObjectFromForm() {
         return -1;
     } else if (newSell.quantityEmploye === '' || newSell.quantityEmploye === null) {
         printMessage('Quantidade vendida para lojistas');
+        return -1;
+    } else if (newSell.date === '' || newSell.date === null) {
+        printMessage('Data da Venda');
         return -1;
     }
     document.getElementById("formCreateSell").reset();

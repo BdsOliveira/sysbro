@@ -15,10 +15,11 @@
     <title>Controle de Brownies</title>
 </head>
 
-<body>
+<body onload="init(6)">
     <div class="title">
-        <p>Consulta Relatórios</p>
-        <h1 class="">&nbsp;</h1>
+        <p>Faturamento<br>Últimos 7 dias</p>
+        <h1>R$&nbsp;<span id="cash"></span></h1>
+
     </div>
 
     <menu>
@@ -32,10 +33,12 @@
     </menu>
 
     <section class="content">
-         
+        <input type="date" id="beginDate">
+        <input type="date" id="endDate">
+        <input class="submit" type="button" onclick="printReport()" value="Cadastrar"></input>
     </section>
 
-    <script src="../js/invoicing.js" type="module"></script>
+    <script src="../js/invoicing.js"></script>
 </body>
 
 </html>

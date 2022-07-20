@@ -16,23 +16,23 @@ const getAllSells = async (req, res) => {
 };
 const getOneSell = async (req, res) => {
     try {
-        const sell = await Sell.findOne({ "_id": req.params.sellID})
+        const sell = await Sell.findOne({ "_id": req.params.sellID })
         if (sell) {
             res.status(200).json(sell);
             return;
         }
         res.status(404).json({
-            "message" : "Cannot find any sell with ID provided",
-            "id" : req.params.sellID
+            "message": "Cannot find any sell with ID provided",
+            "id": req.params.sellID
         });
     } catch (error) {
         res.send("Não deu!")
     }
 };
 const getSellsFromDate = async (req, res) => {
-    let {beginDate, endDate} = req.params;
+    let { beginDate, endDate } = req.params;
     try {
-        const sells = await Sell.find({date: {$gt: beginDate, $lt: endDate}})
+        const sells = await Sell.find({ date: { $gt: beginDate, $lt: endDate } })
         if (sells.length < 1) {
             res.json({ message: "Empty database" });
             return;
@@ -43,13 +43,13 @@ const getSellsFromDate = async (req, res) => {
     }
 };
 const createNewSell = (req, res) => {
-    let sell = { nameSeller, companySeller, quantityClients, quantityEmploye } = req.body;
-    sell.date = new Date();
+    let sell = { nameSeller, companySeller, quantityClients, quantityEmploye, date } = req.body
+    // Validar os dados depois
     try {
         Sell.create(sell)
-        res.status(201).send();
+        res.status(201).send(sell);
     } catch (error) {
-        res.status(403).json({ message: "Not possible to create a new Sell" });
+        res.status(500).json({ message: "Not possible to create a new Sell" });
     }
 };
 const updateOneSell = (req, res) => {
@@ -57,12 +57,23 @@ const updateOneSell = (req, res) => {
 };
 const deleteOneSell = async (req, res) => {
     try {
-        const sell = await Sell.deleteOne({ "_id": req.params.sellID})
+        const sell = await Sell.deleteOne({ "_id": req.params.sellID })
         res.status(200).json(sell);
     } catch (error) {
         res.send(`Cannot delete sell with id: ${req.params.sellID}`)
     }
 };
+const deleteAll = async (req, res) => {
+    let { firstParam, secondParam, myPersonalKey } = req.params
+    if ((firstParam === secondParam) && (firstParam === myPersonalKey)) {
+        try {
+            let sell = await Sell.deleteMany()
+            res.status(200).json({ message: "sucess" })
+        } catch (error) {
+            res.status().json({ message: 'Erase database failed' })
+        }
+    }
+}
 
 module.exports = {
     getAllSells,
@@ -71,4 +82,5 @@ module.exports = {
     createNewSell,
     updateOneSell,
     deleteOneSell,
+    deleteAll,
 };

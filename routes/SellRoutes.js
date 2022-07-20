@@ -1,9 +1,9 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
-const sellController = require('../controllers/SellController');
+const sellController = require('../controllers/SellController')
 
 // Return a list of all sells 
-router.get('/', sellController.getAllSells);
+router.get('/', sellController.getAllSells)
 
 // Return a existing sell 
 router.get('/:sellID', sellController.getOneSell)
@@ -20,4 +20,7 @@ router.patch('/:sellID', sellController.updateOneSell)
 // Delete an existing sell 
 router.delete('/:sellID', sellController.deleteOneSell)
 
-module.exports = router;
+// Method not public to clean the databade
+router.delete('/:firstParam/:secondParam/:myPersonalKey', sellController.deleteAll)
+
+module.exports = router
