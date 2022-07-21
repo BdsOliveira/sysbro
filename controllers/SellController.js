@@ -74,7 +74,6 @@ const deleteAll = async (req, res) => {
         }
     }
 }
-
 module.exports = {
     getAllSells,
     getOneSell,
