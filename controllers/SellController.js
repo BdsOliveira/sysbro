@@ -1,6 +1,5 @@
 const Sell = require('../entities/Sell')
 const dateToBrString = require('../services/dateToBrString')
-//const addOneHourToDateTime = require('../services/SellService')
 
 const getAllSells = async (req, res) => {
     try {
@@ -10,7 +9,6 @@ const getAllSells = async (req, res) => {
             res.json({ message: "Empty database" });
             return;
         }
-        //sells = addOneHourToDateTime(sells)
         res.status(200).json(sells);
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" });
@@ -20,7 +18,6 @@ const getOneSell = async (req, res) => {
     try {
         let sell = await Sell.findOne({ "_id": req.params.sellID })
         if (sell) {
-            //sell = addOneHourToDateTime(sell)
             res.status(200).json(sell);
             return;
         }
@@ -33,7 +30,6 @@ const getOneSell = async (req, res) => {
     }
 };
 const getSellsFromDate = async (req, res) => {
-    // Trecho com erro
     let { beginDate, endDate } = req.params;
     try {
         let sells = await Sell.find({ date: { $gte: beginDate, $lte: endDate } })
@@ -41,7 +37,6 @@ const getSellsFromDate = async (req, res) => {
             res.json({ message: "Empty database" });
             return;
         }
-        //sells = addOneHourToDateTime(sells)
         res.status(200).json(sells);
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" });
