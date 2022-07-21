@@ -11,7 +11,6 @@ function dateToBrString(brDate) {
         brDate.getSeconds().toString().padStart(2, '0') + 
         " (Horário Padrão de Brasília)";
 }
-
 function weekDayToBrString(day) {
     if (day === 0) {
         return "Dom";
@@ -29,7 +28,6 @@ function weekDayToBrString(day) {
         return "Sab"
     }
 }
-
 function monthToBrString(month) {
     if (month === 0) {
         return "Jan";
@@ -57,5 +55,4 @@ function monthToBrString(month) {
         return "Dez"
     }
 }
-
 module.exports = dateToBrString;

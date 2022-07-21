@@ -1,14 +1,16 @@
-const Sell = require('../entities/Sell');
-const dateToBrString = require('../services/dateToBrString');
+const Sell = require('../entities/Sell')
+const dateToBrString = require('../services/dateToBrString')
+//const addOneHourToDateTime = require('../services/SellService')
 
 const getAllSells = async (req, res) => {
     try {
-        const sells = await Sell.find();
+        let sells = await Sell.find();
 
         if (sells.length < 1) {
             res.json({ message: "Empty database" });
             return;
         }
+        //sells = addOneHourToDateTime(sells)
         res.status(200).json(sells);
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" });
@@ -16,8 +18,9 @@ const getAllSells = async (req, res) => {
 };
 const getOneSell = async (req, res) => {
     try {
-        const sell = await Sell.findOne({ "_id": req.params.sellID })
+        let sell = await Sell.findOne({ "_id": req.params.sellID })
         if (sell) {
+            //sell = addOneHourToDateTime(sell)
             res.status(200).json(sell);
             return;
         }
@@ -30,13 +33,15 @@ const getOneSell = async (req, res) => {
     }
 };
 const getSellsFromDate = async (req, res) => {
+    // Trecho com erro
     let { beginDate, endDate } = req.params;
     try {
-        const sells = await Sell.find({ date: { $gt: beginDate, $lt: endDate } })
+        let sells = await Sell.find({ date: { $gte: beginDate, $lte: endDate } })
         if (sells.length < 1) {
             res.json({ message: "Empty database" });
             return;
         }
+        //sells = addOneHourToDateTime(sells)
         res.status(200).json(sells);
     } catch (error) {
         res.status(500).json({ error: "Internal Server Error" });
