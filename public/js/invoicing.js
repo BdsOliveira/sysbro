@@ -34,10 +34,8 @@ async function getInvoicingEmploye(beginDate) {
 }
 
 async function getReport() {
-    let beginDate = new Date(document.getElementById("beginDate").value);
-    let endDate = new Date(document.getElementById("endDate").value);
-    endDate.setDate(endDate.getDate() + 1);
-    endDate.setMilliseconds(endDate.getMilliseconds() - 1);
+    let beginDate = new Date(document.getElementById("beginDate").value).toISOString()
+    let endDate = new Date(document.getElementById("endDate").value).toISOString()
     let vendas = [];
     vendas = await fetch(`https://sysbro.herokuapp.com/sells/${beginDate}/${endDate}`);
     return await vendas.json();
@@ -58,6 +56,7 @@ function populateTable(listOfSellsFromPeriod) {
     for (let index = 0; index < listOfSellsFromPeriod.length; index++) {
         console.log(listOfSellsFromPeriod[index]);
         if (index === 0) {
+            // print result on screen 
             compactedtList = listOfSellsFromPeriod[index];
         }
 
