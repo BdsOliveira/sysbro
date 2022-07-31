@@ -28,14 +28,29 @@
             <a href="/pages/form-create-sell.html"><i class="fa-solid fa-circle-plus"></i></a>
             <a class="active" href="/pages/report.html"><i class="fa-solid fa-chart-column"></i></a>
             <!-- <a href="#"><i class="fa fa-globe"></i></a>
-            <a href="#"><i class="fa fa-trash"></i></a> -->
+                <a href="#"><i class="fa fa-trash"></i></a> -->
         </div>
     </menu>
 
     <section class="content">
         <input type="date" id="beginDate">
         <input type="date" id="endDate">
-        <input class="submit" type="button" onclick="printReport()" value="Cadastrar"></input>
+        <input class="submit" type="button" onclick="printReport()" value="Consultar"></input>
+
+        <div class="report" id="iReport">
+            <table id="iTable">
+                <thead>
+                    <tr>
+                        <th>Vendedor</th>
+                        <th>Vendas</th>
+                        <th>Comissão</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <script src="../js/invoicing.js"></script>

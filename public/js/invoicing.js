@@ -1,7 +1,10 @@
+const BROWNIE_PRICE = 5
+const BROWNIE_COMMISSION = 1
+const URL_API = "https://sysbro.herokuapp.com/sells"
+
 async function init(beginDate = 0) {
     const clients = await getInvoicingClients(beginDate);
-    const employe = await getInvoicingEmploye(beginDate);
-    document.getElementById("cash").innerHTML = ((clients * 4) + (employe * 3) + ',00');
+    document.getElementById("cash").innerHTML = ((clients * BROWNIE_PRICE) + ',00');
 }
 
 async function getAllSellsFromXDays(beginDate = 0) {
@@ -11,7 +14,7 @@ async function getAllSellsFromXDays(beginDate = 0) {
     const initialDate = date.toISOString();
 
     let vendas = [];
-    vendas = await fetch(`https://sysbro.herokuapp.com/sells/${initialDate}/${endDate}`);
+    vendas = await fetch(`${URL_API}/${initialDate}/${endDate}`);
     return await vendas.json();
 }
 
@@ -19,25 +22,16 @@ async function getInvoicingClients(beginDate = 0) {
     const allSells = await getAllSellsFromXDays(beginDate);
     let invoicingClients = 0;
     for (let i = 0; i < allSells.length; i++) {
-        invoicingClients += (allSells[i].quantityClients);
+        invoicingClients += (allSells[i].quantitySold);
     }
     return invoicingClients;
-}
-
-async function getInvoicingEmploye(beginDate) {
-    const allSells = await getAllSellsFromXDays(beginDate);
-    let invoicingEmploye = 0;
-    for (let i = 0; i < allSells.length; i++) {
-        invoicingEmploye += (allSells[i].quantityEmploye);
-    }
-    return invoicingEmploye;
 }
 
 async function getReport() {
     let beginDate = new Date(document.getElementById("beginDate").value).toISOString()
     let endDate = new Date(document.getElementById("endDate").value).toISOString()
     let vendas = [];
-    vendas = await fetch(`https://sysbro.herokuapp.com/sells/${beginDate}/${endDate}`);
+    vendas = await fetch(`${URL_API}/${beginDate}/${endDate}`);
     return await vendas.json();
 }
 
@@ -52,13 +46,27 @@ function printReport() {
 }
 
 function populateTable(listOfSellsFromPeriod) {
-    let compactedtList = {}
     for (let index = 0; index < listOfSellsFromPeriod.length; index++) {
-        console.log(listOfSellsFromPeriod[index]);
-        if (index === 0) {
-            // print result on screen 
-            compactedtList = listOfSellsFromPeriod[index];
-        }
-
+        console.log(listOfSellsFromPeriod[index])
+        addNewTrOnTable(listOfSellsFromPeriod[index], index + 1)
     }
+}
+
+function addNewTrOnTable(row, numberRow) {
+    createTrTag(numberRow)
+    addNewDataTable(row.nameSeller, numberRow)
+    addNewDataTable(`R$ ${row.quantitySold * BROWNIE_PRICE},00`, numberRow)
+    addNewDataTable(`R$ ${row.quantitySold * BROWNIE_COMMISSION},00`, numberRow)
+}
+
+function createTrTag(numberRow) {
+    let tableRow = document.createElement("tr")
+    tableRow.id = `row${numberRow}`
+    document.getElementById("tableBody").appendChild(tableRow)
+}
+
+function addNewDataTable(data, numberRow) {
+    let tableData = document.createElement("td")
+    tableData.innerHTML = data;
+    document.getElementById(`row${numberRow}`).appendChild(tableData)
 }

@@ -28,6 +28,25 @@
   padding: 20px;
 }
 
+table {
+  visibility: visible;
+  margin-top: 20px;
+  border: solid black 0px;
+  width: 98%;
+  border-spacing: 0px;
+}
+
+th {
+  background-color: #ccc;
+  padding: 5px 8px;
+  border: solid black 0px;
+}
+
+td {
+  padding: 1px 8px;
+  border: solid black 0px;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -67,7 +86,7 @@ label {
 
 .submit {
   margin-top: 20px;
-  width: 96%;
+  width: 98%;
   font-size: 1.5rem;
   border: none;
   background-color: #04AA6D;
