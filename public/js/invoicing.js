@@ -46,8 +46,12 @@ function printReport() {
 }
 
 function populateTable(listOfSellsFromPeriod) {
-    for (let index = 0; index < listOfSellsFromPeriod.length; index++) {
-        addNewTrOnTable(listOfSellsFromPeriod[index], index + 1)
+    if (listOfSellsFromPeriod.length < 1) {
+        alert("Não existem vendas cadastradas no período.");
+    } else {
+        for (let index = 0; index < listOfSellsFromPeriod.length; index++) {
+            addNewTrOnTable(listOfSellsFromPeriod[index], index + 1)
+        }
     }
 }
 
