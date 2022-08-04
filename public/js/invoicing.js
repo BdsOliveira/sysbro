@@ -47,7 +47,6 @@ function printReport() {
 
 function populateTable(listOfSellsFromPeriod) {
     for (let index = 0; index < listOfSellsFromPeriod.length; index++) {
-        console.log(listOfSellsFromPeriod[index])
         addNewTrOnTable(listOfSellsFromPeriod[index], index + 1)
     }
 }
